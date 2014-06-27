@@ -1,0 +1,16 @@
+{
+  "name": "Dessin",
+  "version": "1.0.0",
+  "authors": [
+    "NHN Technology Services"
+  ],
+  "license": "BSD",
+    "dependencies": {
+    "underscore": "~1.6.0",
+    "jquery": "~1.9.0",
+    "bootstrap": "~3.1.0",
+    "requirejs": "~2.1.10",
+    "json2": "*",
+    "jquery-ui": "~1.10.3"
+  }
+}
