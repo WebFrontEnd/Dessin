@@ -1,71 +1,130 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Dessin by WebFrontEnd</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Dessin</h1>
-        <p>This Application is a tool to draw.</p>
+    <title>Dessin</title>
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="vendor/jquery-ui/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="res/css/dessin.css"/>
+</head>
+<body>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Dessin</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Dessin</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container" role="main">
+        <section>
+            <div class="btn-group btn-group-sm _layer_btn_section">
+                <button type="button" data-layer-idx="0" class="btn btn-default btn-success">#1<span class="badge">O</span></button>
+                <button type="button" data-layer-idx="1" class="btn btn-default">#2<span class="badge">O</span></button>
+                <button type="button" data-layer-idx="2" class="btn btn-default">#3<span class="badge">O</span></button>
+            </div>
+            <div class="canvas _dessin_stage"></div>
+        </section>
+        <section>
+            <div class="panel panel-default _layer_transform_btn_section">
+                <div class="panel-body">
+                    <button type="button" data-type="ZOOMIN" class="btn btn-default glyphicon glyphicon-zoom-in">확대</button>
+                    <button type="button" data-type="ZOOMOUT" class="btn btn-default glyphicon glyphicon-zoom-out">축소</button>
+                    <button type="button" data-type="ZOOMMOVE" class="btn btn-default glyphicon glyphicon-move">이동</button>
+                    <button type="button" data-type="UNDO" class="btn btn-default glyphicon glyphicon-arrow-left">한단계뒤</button>
+                    <button type="button" data-type="REDO" class="btn btn-default glyphicon glyphicon-arrow-right">한단계앞</button>
+                    <button type="button" data-type="RESET" class="btn btn-warning glyphicon glyphicon-pencil">새로그리기</button>
+                </div>
+            </div>
+        </section>
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">그리기 도구</h3>
+                </div>
+                <div class="panel-body _tool_section">
+                    <button type="button" data-tool-name="PEN" class="btn btn-default"><img src="res/img/icon/Pen2.png" alt="그리기도구 펜"/></button>
+                    <button type="button" data-tool-name="PAINT" class="btn btn-default"><img src="res/img/icon/Paint.png" alt="그리기도구 페인트"/></button>
+                    <button type="button" data-tool-name="ERASER" class="btn btn-default"><img src="res/img/icon/Eraser.png" alt="그리기도구 지우개"/></button>
+                    <button type="button" data-tool-name="PATTERN" class="btn btn-default"><img src="res/img/icon/PixelArt.png" alt="그리기도구 스크린톤"/></button>
+                    <button type="button" data-tool-name="BRUSH" class="btn btn-default"><img src="res/img/icon/Brush.png" alt="그리기도구 브러쉬1"/></button>
+                    <button type="button" data-tool-name="CRAYON" class="btn btn-default"><img src="res/img/icon/Brush2.png" alt="그리기도구 브러쉬2" /></button>
+                    <button type="button" data-tool-name="AIR_BRUSH" class="btn btn-default"><img src="res/img/icon/Spray.png" alt="그리기도구 스프레이" /></button>
+                    <button type="button" data-tool-name="TEXT" class="btn btn-default"><img src="res/img/icon/Type.png" alt="그리기도구 텍스트"/></button>
+                </div>
+            </div>
+        <div class="panel panel-default _airbrush_setting">
+            <div class="panel-heading">
+                <h3 class="panel-title">에어브러시 설정</h3>
+            </div>
+            <div class="panel-body _tool_section row">
+                <div class="col-xs-6 col-md-6">
+                    <canvas class="circle-preview _brush_preview" width="100" height="100"></canvas>
+                </div>
 
-        <p class="view"><a href="https://github.com/WebFrontEnd/Dessin">View the Project on GitHub <small>WebFrontEnd/Dessin</small></a></p>
+                <div class="col-xs-6 col-md-6">
+                    <label>사이즈</label><div class="slider _brush_size_slider"></div>
+                    <label>투명도</label><div class="slider _brush_opacity_slider"></div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">색상</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-6 col-md-4">
+                        <div class="circle-preview" id="swatch"></div>
+                        <button type="button" data-tool-name="PICK" class="btn btn-default _pick_color_btn circle-button"><img src="res/img/icon/Eyedropper.png" alt="스포이드"/></button>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <div id="selected_colors"></div>
+                    </div>
+                    <div class="col-xs-12 col-lg-8">
+                        <div class="slider red" id="_red_slider"></div>
+                        <div class="slider green" id="_green_slider"></div>
+                        <div class="slider blue" id="_blue_slider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default _text_option_stage">
+            <div class="panel-heading">
+                <h3 class="panel-title">텍스트 설정</h3>
+            </div>
+            <div class="panel-body">
+                <select id="_font_select">
+                    <option value="굴림체">굴림체</option>
+                </select>
 
-
-        <ul>
-          <li><a href="https://github.com/WebFrontEnd/Dessin/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/WebFrontEnd/Dessin/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/WebFrontEnd/Dessin">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/WebFrontEnd">WebFrontEnd</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+                <div class="slider _text_size_slider"></div>
+            </div>
+        </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="vendor/underscore/underscore.js"></script>
+    <script type="text/javascript" src="vendor/jquery-ui/ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="vendor/json2/json2.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="dist/Dessin.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var oPainter = new Dessin.App($('._dessin_stage'), {
+                nLayerCount : 3,
+                nWidth : 250,
+                nHeight : 250
+            });
+
+            Dessin.ui.oToolUI = new Dessin.ui.ToolUI(oPainter);
+            Dessin.ui.oColorPicker = new Dessin.ui.ColorPickerUI(oPainter);
+            Dessin.ui.LayerController = new Dessin.ui.LayerController(oPainter);
+        });
+    </script>
+</body>
 </html>
