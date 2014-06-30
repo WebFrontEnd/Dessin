@@ -101,15 +101,13 @@ requirejs([
     'ui/dessin.ui.ColorPickerUI',
     'core/dessin.App'
 ], function($){
-    $(document).read(function(){
-        var oPainter = new Dessin.App($('._dessin_stage'), {
-            nLayerCount : 3,
-            nWidth : 250,
-            nHeight : 250
-        });
-
-        Dessin.ui.oToolUI = new Dessin.ui.ToolUI(oPainter);
-        Dessin.ui.oColorPicker = new Dessin.ui.ColorPickerUI(oPainter);
-        Dessin.ui.LayerController = new Dessin.ui.LayerController(oPainter);
+    var oPainter = new Dessin.App($('._dessin_stage'), {
+        nLayerCount : 3,
+        nWidth : 250,
+        nHeight : 250
     });
+
+    Dessin.ui.oToolUI = new Dessin.ui.ToolUI(oPainter);
+    Dessin.ui.oColorPicker = new Dessin.ui.ColorPickerUI(oPainter);
+    Dessin.ui.LayerController = new Dessin.ui.LayerController(oPainter);
 });
