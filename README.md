@@ -1,5 +1,7 @@
 # Dessin.js
 Canvas를 활용하여 개발한 모바일용 그림 그리기 응용프로그램입니다.
+[데모](http://webfrontend.github.io/Dessin/)에서 확인 하실 수 있습니다.
+
 
 ## 지원
 
@@ -41,9 +43,11 @@ Grunt 설치가 되어 있지 않다면 아래 명령어로 설치한다.
 `npm install -g grunt-cli`
 
 Grunt 의존 모듈들을 설치한다.
+
 `npm install`
 
 다음 명령어로 빌드한다.
+
 `grunt`
 
 빌드한 파일은 `dist` 폴더에 `Dessin.js`로 통합되며 `Dessin.min.js`로 압축된다.
