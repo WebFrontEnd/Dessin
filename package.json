@@ -1,0 +1,16 @@
+{
+  "name": "Dessin",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-requirejs": "~0.4.4"
+  },
+  "description": "Canvas를 활용하여 개발한 모바일용 그림 그리기 응용프로그램입니다.",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "~0.4.5"
+  }
+}

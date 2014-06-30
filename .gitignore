@@ -7,5 +7,3 @@ node_modules/
 vendor/
 dist/
 test/
-Gruntfile.js
-package.json

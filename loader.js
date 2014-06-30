@@ -39,17 +39,17 @@ requirejs.config({
          */
         'core/dessin.App': {
             deps: [
-                /** LIB **/
+            /** LIB **/
                 'underscore',
                 'jquery',
                 'bootstrap',
                 'json2',
 
-                /** DEFAULT **/
+            /** DEFAULT **/
                 'core/util/dessin.Utility',
                 'core/util/dessin.Touch',
 
-	            /** CORE **/
+            /** CORE **/
                 'core/dessin.ColorModel',
                 'core/dessin.Controller',
                 'core/dessin.Drawing',
@@ -72,7 +72,7 @@ requirejs.config({
          */
         'ui/dessin.ui.LayerController': {
             deps: [
-	            'jquery',
+                'jquery',
                 'ui/dessin.ui.TextUI',
                 'ui/dessin.ui.LayerUI',
                 'ui/dessin.ui.DrawingUI'
@@ -81,7 +81,7 @@ requirejs.config({
 
         'ui/dessin.ui.ColorPickerUI': {
             deps: [
-                'jquery-ui',
+                'jquery-ui'
             ]
         },
         'ui/dessin.ui.ToolUI': {
@@ -101,14 +101,15 @@ requirejs([
     'ui/dessin.ui.ColorPickerUI',
     'core/dessin.App'
 ], function($){
+    $(document).read(function(){
+        var oPainter = new Dessin.App($('._dessin_stage'), {
+            nLayerCount : 3,
+            nWidth : 250,
+            nHeight : 250
+        });
 
-	var oPainter = new Dessin.App($('._dessin_stage'), {
-		nLayerCount : 3,
-		nWidth : 250,
-		nHeight : 250
-	});
-
-    Dessin.ui.oToolUI = new Dessin.ui.ToolUI(oPainter);
-    Dessin.ui.oColorPicker = new Dessin.ui.ColorPickerUI(oPainter);
-    Dessin.ui.LayerController = new Dessin.ui.LayerController(oPainter);
+        Dessin.ui.oToolUI = new Dessin.ui.ToolUI(oPainter);
+        Dessin.ui.oColorPicker = new Dessin.ui.ColorPickerUI(oPainter);
+        Dessin.ui.LayerController = new Dessin.ui.LayerController(oPainter);
+    });
 });
